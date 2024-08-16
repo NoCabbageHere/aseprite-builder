@@ -1,7 +1,5 @@
 name: Build and release Aseprite
 
-- name: Delete existing file
-  run: del aseprite\\build\\bin\\Aseprite-v1.3.7-Windows.zip
 on:
   push:
     branches:
@@ -114,6 +112,8 @@ jobs:
       - name: Create release
         working-directory: aseprite/build/bin
         run: 7z -tzip a Aseprite-${{ needs.create-release.outputs.release-tag }}-${{ runner.os }}.zip *
+      - name: Delete existing file
+        run: del aseprite\\build\\bin\\Aseprite-v1.3.7-Windows.zip
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
